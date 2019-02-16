@@ -21,12 +21,10 @@ abstract class UseCase<in P, R> {
                         result.postValue(Result.Success(useCaseResult))
                     }
                 } catch (e: Exception) {
-                    Log.e(e)
                     result.postValue(Result.Error(e))
                 }
             }
         } catch (e: Exception) {
-            Log.e(e)
             result.postValue(Result.Error(e))
         }
     }
