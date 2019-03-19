@@ -1,48 +1,28 @@
 package com.github.chizoba.starwarz.di.modules
 
 import com.github.chizoba.starwarz.BuildConfig
-import com.github.chizoba.starwarz.data.MoviesService
+import com.github.chizoba.starwarz.data.StarWarsAPI
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 
 @Module(includes = [AppModule::class])
 class NetworkModule {
 
+    @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(MoviesService.ENDPOINT)
+            .baseUrl(StarWarsAPI.BASE_URL)
             .client(okHttpClient)
             .build()
     }
-
-//    @Provides
-//    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, cache: Cache): OkHttpClient {
-//        val client = OkHttpClient.Builder()
-//        client.addInterceptor(httpLoggingInterceptor)
-//        client.addInterceptor { chain ->
-//            val request = chain.request().newBuilder()
-//            request.addHeader("Content-Type", "application/json")
-//            chain.proceed(request.build())
-//        }
-//        client.connectTimeout(20, TimeUnit.SECONDS)
-//        client.readTimeout(30, TimeUnit.SECONDS)
-//        client.writeTimeout(30, TimeUnit.SECONDS)
-//        client.cache(cache)
-//        return client.build()
-//    }
-
-//    @Provides
-//    fun provideCache(context: Context): Cache {
-//        val cacheSize = 10 * 1024 * 1024
-//        return Cache(context.cacheDir, cacheSize.toLong())
-//    }
 
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
@@ -58,4 +38,11 @@ class NetworkModule {
     @Provides
     fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build()
+
+
+    @Provides
+    fun provideMoviesService(retrofit: Retrofit): StarWarsAPI {
+        return retrofit.create(StarWarsAPI::class.java)
+    }
+
 }

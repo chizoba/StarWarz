@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">StarWarz</string>
+    <string name="app_name">StarWars</string>
+    <string name="movies">Movies</string>
+    <string name="characters">Characters</string>
+    <string name="search_hint">Search Star Wars Characters</string>
+    <string name="empty_data">No result found.\nPlease try again.</string>
+
+    <!--Character details screen-->
+    <string name="character_name">Name: %1$s</string>
+    <string name="birth_year">Birth year: %1$s</string>
+    <string name="height">Height: %1$scm</string>
+    <string name="specie">Specie</string>
+    <string name="specie_name">Name: %1$s</string>
+    <string name="specie_language">Language: %1$s</string>
+    <string name="specie_homeworld">Home world: %1$s</string>
+    <string name="planet">Planet</string>
+    <string name="planets_population">Population: %1$s</string>
+
+    <!--Movie item-->
+    <string name="release_date">Release date: %1$s</string>
+    <string name="director">Director: %1$s</string>
+    <string name="producer">Producer: %1$s</string>
+
 </resources>
